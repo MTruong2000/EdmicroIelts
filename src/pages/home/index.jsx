@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import AboutUs from '../../components/aboutus'
+import Banner from '../../components/banner'
 import './style.scss'
 
 function Home() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      HOME PAGES
+      <Banner />
+      <AboutUs />
+      <div>Homepages</div>
     </>
   )
 }

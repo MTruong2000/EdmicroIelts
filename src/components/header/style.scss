@@ -1,0 +1,15 @@
+.btn__signin_signup {
+    display: flex;
+    column-gap: 16px;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 991px) {
+    .btn__signin_signup {
+        row-gap: 16px;
+        flex-direction: column;
+        .btn-outline-success {
+            width: 30%;
+        }
+    }
+}
