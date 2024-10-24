@@ -123,6 +123,10 @@ table {
   border-spacing: 0;
 }
 
+body {
+  font-size: 18px;
+}
+
 :root {
   --background-color-primary: #f2f2f2;
   --text-color-light: #fff;
@@ -152,4 +156,8 @@ table {
   padding: 16px 32px;
   font-weight: bolder;
   text-transform: uppercase;
+}
+
+.fw-custom {
+  font-weight: bolder;
 }

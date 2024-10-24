@@ -1,0 +1,61 @@
+.block-discover {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2%;
+  flex-wrap: wrap;
+  background-image: url("https://templatekits.themewarrior.com/inglis/wp-content/uploads/sites/49/2022/03/bg-mentors-sect.png");
+  .block-content {
+    width: 49%;
+    padding: 80px 52px;
+    background: #9cc094;
+    height: fit-content;
+    margin: auto;
+    color: var(--text-color-light);
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    border-radius: 4px;
+    h5 {
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+    .btn-discover {
+      border-radius: 100px;
+      padding: 16px 32px;
+      background: #fff;
+      color: #9cc094;
+      width: fit-content;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+  .block-img-mentor {
+    width: 49%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2%;
+
+    .block-mentor {
+      width: 49%;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+@media screen and (max-width: 991px) {
+  .block-content {
+    width: 100% !important;
+  }
+  .block-img-mentor {
+    width: 100% !important;
+  }
+}
