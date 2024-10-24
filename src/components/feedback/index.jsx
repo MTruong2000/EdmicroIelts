@@ -2,8 +2,7 @@ import "./style.scss";
 import { Carousel } from "antd";
 import { Card } from "antd";
 import { FaStar } from "react-icons/fa";
-
-const { Meta } = Card;
+import { useEffect, useRef } from "react";
 
 const contentStyle = {
   margin: 0,
@@ -14,10 +13,37 @@ const contentStyle = {
   background: "#364d79",
 };
 function Feedback() {
+  const animationRefs = useRef([]);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const animationClass = entry.target.dataset.animation;
+          entry.target.classList.add("animate__animated", animationClass);
+        }
+      });
+    });
+
+    animationRefs.current.forEach((element) => {
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [animationRefs]);
   return (
     <>
       <div className="block-feedback mt-5">
-        <h1 className="pt-4 pb-4">Student's Feedback</h1>
+        <h1
+          className="pt-4 pb-4 animate__animated"
+          ref={(element) => animationRefs.current.push(element)}
+          data-animation="animate__backInDown"
+        >
+          Student's Feedback
+        </h1>
         <Carousel className="pt-4 pb-4">
           <div className="block-card">
             <Card>
