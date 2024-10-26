@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import "./style.scss";
+import { FiMenu } from "react-icons/fi";
+import { MdOutlineCancel } from "react-icons/md";
 import { useEffect, useState } from "react";
+import "./style.scss";
 
 function Header() {
   const [isSticky, setIsSticky] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleScroll = () => {
     if (window.scrollY > 32) {
       setIsSticky(true);
@@ -17,6 +21,13 @@ function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const cancelModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <div className={`block-header ${isSticky ? "sticky" : ""}`}>
@@ -36,6 +47,31 @@ function Header() {
             <div className="btn-signin">Sign In</div>
             <div className="btn-signup">Sign Up</div>
           </div>
+        </div>
+
+        <div className="block-header-content-sp">
+          <FiMenu onClick={showModal} />
+
+          {isModalOpen && (
+            <div
+              className={`animate__animated block-modal-sp ${
+                isModalOpen ? "animate__backInRight" : "animate__bounceOutRight"
+              }`}
+            >
+              <div className="block-modal-cancel">
+                <MdOutlineCancel onClick={cancelModal} />
+              </div>
+              <div className="block-modal-sp-link">
+                <a href="/">Homepages</a>
+                <a href="/course">Courses</a>
+                <a href="/contact">Contact</a>
+              </div>
+              <div className="block-modal-sp-signin-signup">
+                <div className="btn-signin">Sign In</div>
+                <div className="btn-signup">Sign Up</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

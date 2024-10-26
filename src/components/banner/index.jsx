@@ -1,30 +1,10 @@
 import React from "react";
-import { Carousel } from "antd";
 import "./style.scss";
 
 function Banner() {
   return (
     <>
       <div className="baner-main">
-        {/* <Carousel arrows infinite={false} className="carousel-custom">
-          <div className="banner-1">
-            <div className="banner-opacity"></div>
-            <div className="banner-content">
-              <h4 className="wc animate__animated animate__bounce animate__backInDown">Welcome</h4>
-              <h1 className="animate__animated animate__fadeInLeftBig animate__delay-1s">Take Your English To The</h1>
-              <h1 className="animate__animated animate__fadeInLeftBig animate__delay-1s">Next Level.</h1>
-              <br />
-              <p className="animate__animated animate__bounceInRight animate__delay-1s">
-                Etanon est nisl mi vitae faucibus nulla amet malesuada bibendum
-                massa
-              </p>
-              <p className="animate__animated animate__bounceInRight animate__delay-1s">vivamus tempor imperdiet posuere</p>
-              <div className="animate__animated animate__bounceInUp animate__delay-2s btn-started">
-                <span>&#10095;</span> get started now
-              </div>
-            </div>
-          </div>
-        </Carousel> */}
         <div className="banner-img">
           <img src="/img/banner.jpg" alt="banner" />
         </div>
