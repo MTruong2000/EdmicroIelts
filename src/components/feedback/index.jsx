@@ -57,7 +57,6 @@ function Feedback() {
           Student's Feedback
         </h1>
         <div>
-          <h1>Chiều rộng màn hình: {windowWidth}px</h1>
           {windowWidth < 500 ? (
             <Carousel autoplay className="pt-4 pb-4">
               <div className="block-card">
