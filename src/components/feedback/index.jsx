@@ -2,7 +2,7 @@ import "./style.scss";
 import { Carousel } from "antd";
 import { Card } from "antd";
 import { FaStar } from "react-icons/fa";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const contentStyle = {
   margin: 0,
@@ -14,6 +14,18 @@ const contentStyle = {
 };
 function Feedback() {
   const animationRefs = useRef([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -44,141 +56,519 @@ function Feedback() {
         >
           Student's Feedback
         </h1>
-        <Carousel className="pt-4 pb-4">
-          <div className="block-card">
-            <Card>
-              <div className="block-fback-student">
-                <div className="block-auth">
-                  <div className="block-auth-img">
-                    <img
-                      src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
-                      alt="auth"
-                    />
-                  </div>
-                  <div className="block-auth-info">
-                    <h4>Kevin Martin</h4>
-                    <p>Student</p>
-                    <div>
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
+        <div>
+          <h1>Chiều rộng màn hình: {windowWidth}px</h1>
+          {windowWidth < 500 ? (
+            <Carousel className="pt-4 pb-4">
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="block-desc">
-                  <p>
-                    No matter what you want to learn, you’ll find an amazing
-                    selection of courses here. The instructors are so
-                    knowledgable while being fun and interesting. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit. Ad blanditiis
-                    consectetur
-                  </p>
-                </div>
+                </Card>
               </div>
-            </Card>
-            <Card>
-              <div className="block-fback-student">
-                <div className="block-auth">
-                  <div className="block-auth-img">
-                    <img
-                      src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
-                      alt="auth"
-                    />
-                  </div>
-                  <div className="block-auth-info">
-                    <h4>Kevin Martin</h4>
-                    <p>Student</p>
-                    <div>
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="block-desc">
-                  <p>
-                    No matter what you want to learn, you’ll find an amazing
-                    selection of courses here. The instructors are so
-                    knowledgable while being fun and interesting. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit. Ad blanditiis
-                    consectetur
-                  </p>
-                </div>
+                </Card>
               </div>
-            </Card>
-            <Card>
-              <div className="block-fback-student">
-                <div className="block-auth">
-                  <div className="block-auth-img">
-                    <img
-                      src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
-                      alt="auth"
-                    />
-                  </div>
-                  <div className="block-auth-info">
-                    <h4>Kevin Martin</h4>
-                    <p>Student</p>
-                    <div>
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
+            </Carousel>
+          ) : windowWidth < 800 ? (
+            <Carousel className="pt-4 pb-4">
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="block-desc">
-                  <p>
-                    No matter what you want to learn, you’ll find an amazing
-                    selection of courses here. The instructors are so
-                    knowledgable while being fun and interesting. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit. Ad blanditiis
-                    consectetur
-                  </p>
-                </div>
-              </div>
-            </Card>
-            <Card>
-              <div className="block-fback-student">
-                <div className="block-auth">
-                  <div className="block-auth-img">
-                    <img
-                      src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
-                      alt="auth"
-                    />
-                  </div>
-                  <div className="block-auth-info">
-                    <h4>Kevin Martin</h4>
-                    <p>Student</p>
-                    <div>
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
-                      <FaStar style={{ color: "#f68a03" }} />
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="block-desc">
-                  <p>
-                    No matter what you want to learn, you’ll find an amazing
-                    selection of courses here. The instructors are so
-                    knowledgable while being fun and interesting. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit. Ad blanditiis
-                    consectetur
-                  </p>
-                </div>
+                </Card>
               </div>
-            </Card>
-          </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-        </Carousel>
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </Carousel>
+          ) : windowWidth < 1024 ? (
+            <Carousel className="pt-4 pb-4">
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </Carousel>
+          ) : (
+            <Carousel className="pt-4 pb-4">
+              <div className="block-card">
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+                <Card>
+                  <div className="block-fback-student">
+                    <div className="block-auth">
+                      <div className="block-auth-img">
+                        <img
+                          src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/small-avatar-1.jpg"
+                          alt="auth"
+                        />
+                      </div>
+                      <div className="block-auth-info">
+                        <h4>Kevin Martin</h4>
+                        <p>Student</p>
+                        <div>
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                          <FaStar style={{ color: "#f68a03" }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="block-desc">
+                      <p>
+                        No matter what you want to learn, you’ll find an amazing
+                        selection of courses here. The instructors are so
+                        knowledgable while being fun and interesting. Lorem
+                        ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                        blanditiis consectetur
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+              <div>
+                <h3 style={contentStyle}>2</h3>
+              </div>
+            </Carousel>
+          )}
+        </div>
       </div>
     </>
   );
