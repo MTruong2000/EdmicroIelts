@@ -6,7 +6,7 @@ function Banner() {
   return (
     <>
       <div className="baner-main">
-        <Carousel arrows infinite={false} className="carousel-custom">
+        {/* <Carousel arrows infinite={false} className="carousel-custom">
           <div className="banner-1">
             <div className="banner-opacity"></div>
             <div className="banner-content">
@@ -24,7 +24,10 @@ function Banner() {
               </div>
             </div>
           </div>
-        </Carousel>
+        </Carousel> */}
+        <div className="banner-img">
+          <img src="/img/banner.jpg" alt="banner" />
+        </div>
         <div className="container introduce">
           <div className="block-1 animate__animated animate__backInLeft animate__delay-2s">
             <div className="bl-img">

@@ -1,33 +1,43 @@
+import { Link } from "react-router-dom";
 import "./style.scss";
-import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import { useEffect, useState } from "react";
 
 function Header() {
+  const [isSticky, setIsSticky] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 32) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-          <img
-            src="https://techydevs.com/demos/themes/html/aduca-demo/aduca/images/logo.png"
-            alt="logo"
-          />
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Homepage</Nav.Link>
-              <Nav.Link href="/courses">Courses</Nav.Link>
-              <Nav.Link href="/contact">Contact</Nav.Link>
-            </Nav>
-            <div className="btn__signin_signup">
-              <Button variant="outline-success" className="btn_main_primary">
-                Sign in
-              </Button>
-              <Button variant="outline-success" className="btn_main_primary">
-                Sign up
-              </Button>
-            </div>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <div className={`block-header ${isSticky ? "sticky" : ""}`}>
+        <div className="block-header-img">
+          <img src="/img/logo.png" alt="logo" />
+        </div>
+        <div className="block-header-content">
+          <div className="block-header-content-left">
+            <a href="/">Homepages</a>
+            <a href="/course">Courses</a>
+            <a href="/contact">Contact</a>
+            {/* <Link to="/">Homepages</Link> */}
+            {/* <Link to="/course">Courses</Link>
+            <Link to="/contact">Contact</Link> */}
+          </div>
+          <div className="block-header-content-right">
+            <div className="btn-signin">Sign In</div>
+            <div className="btn-signup">Sign Up</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
