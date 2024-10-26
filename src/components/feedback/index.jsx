@@ -59,7 +59,7 @@ function Feedback() {
         <div>
           <h1>Chiều rộng màn hình: {windowWidth}px</h1>
           {windowWidth < 500 ? (
-            <Carousel className="pt-4 pb-4">
+            <Carousel autoplay className="pt-4 pb-4">
               <div className="block-card">
                 <Card>
                   <div className="block-fback-student">
@@ -130,7 +130,7 @@ function Feedback() {
               </div>
             </Carousel>
           ) : windowWidth < 800 ? (
-            <Carousel className="pt-4 pb-4">
+            <Carousel autoplay className="pt-4 pb-4">
               <div className="block-card">
                 <Card>
                   <div className="block-fback-student">
@@ -265,7 +265,7 @@ function Feedback() {
               </div>
             </Carousel>
           ) : windowWidth < 1024 ? (
-            <Carousel className="pt-4 pb-4">
+            <Carousel autoplay className="pt-4 pb-4">
               <div className="block-card">
                 <Card>
                   <div className="block-fback-student">
@@ -432,7 +432,7 @@ function Feedback() {
               </div>
             </Carousel>
           ) : (
-            <Carousel className="pt-4 pb-4">
+            <Carousel autoplay className="pt-4 pb-4">
               <div className="block-card">
                 <Card>
                   <div className="block-fback-student">
