@@ -56,7 +56,7 @@ function Header() {
             <div
               className={`animate__animated block-modal-sp ${
                 isModalOpen ? "animate__backInRight" : "animate__bounceOutRight"
-              }`}
+              } ${!isSticky ? "" : "block-modal-sp-sticky"}`}
             >
               <div className="block-modal-cancel">
                 <MdOutlineCancel onClick={cancelModal} />
