@@ -1,6 +1,6 @@
 .block-header {
   background: #000948;
-  height: 70px;
+  height: 87px;
   margin: 0 40px;
   display: flex;
   color: var(--text-color-light);
@@ -9,12 +9,12 @@
   top: 32px;
   z-index: 99;
   opacity: 0.9;
-  border-radius: 20px;
+  border-radius: 100px;
   padding: 0 28px;
 
   .block-header-img {
     width: 200px;
-    height: 100%;
+    height: 70px;
 
     img {
       width: 100%;
@@ -156,5 +156,11 @@
       flex: 1;
       text-align: end;
     }
+  }
+}
+
+@media (max-width: 800px) {
+  .block-header {
+    margin: 0;
   }
 }

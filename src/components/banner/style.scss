@@ -39,3 +39,16 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .introduce {
+    flex-direction: column;
+    width: 72%;
+  }
+}
+
+@media (max-width: 600px) {
+  .introduce {
+    display: none !important;
+  }
+}

@@ -104,3 +104,15 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .block-aboutus {
+    margin-top: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .block-aboutus {
+    margin-top: 24px;
+  }
+}
