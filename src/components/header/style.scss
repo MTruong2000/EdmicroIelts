@@ -1,6 +1,6 @@
 .block-header {
   background: #000948;
-  height: 87px;
+  height: 60px;
   margin: 0 40px;
   display: flex;
   color: var(--text-color-light);
@@ -8,13 +8,12 @@
   position: sticky;
   top: 32px;
   z-index: 99;
-  opacity: 0.9;
   border-radius: 100px;
   padding: 0 28px;
 
   .block-header-img {
-    width: 200px;
-    height: 70px;
+    width: 240px;
+    height: 25px;
 
     img {
       width: 100%;
@@ -33,14 +32,16 @@
     font-size: 16px;
 
     .block-header-content-left {
+      display: flex;
+      column-gap: 12px;
       a {
         text-decoration: none;
         color: #fff;
-        padding: 24px 12px;
+        padding: 4px 2px;
       }
 
       a:hover {
-        background: #424770;
+        border-bottom: 1px solid;
       }
     }
 
@@ -108,14 +109,14 @@
         padding-top: 16px;
         text-align: left;
         display: flex;
-        flex-direction: column;
-        row-gap: 12px;
+        justify-content: space-between;
 
         .btn-signin {
           text-align: center;
           border: 1px solid;
           border-radius: 16px;
           padding: 12px 0;
+          min-width: 112px;
         }
 
         .btn-signup {
@@ -123,6 +124,9 @@
           border: 1px solid;
           border-radius: 16px;
           padding: 12px 0;
+          min-width: 112px;
+          background: #fff;
+          color: #000948;
         }
       }
     }
@@ -162,5 +166,13 @@
 @media (max-width: 800px) {
   .block-header {
     margin: 0;
+    top: 0;
+    border-radius: 0;
+    .block-header-content-sp {
+      .block-modal-sp {
+        right: -28px;
+        top: -24px;
+      }
+    }
   }
 }

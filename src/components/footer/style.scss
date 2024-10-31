@@ -12,6 +12,16 @@
     flex-direction: column;
     row-gap: 12px;
 
+    .block-footer-logo {
+      height: 32px;
+      margin: 12px 0;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
     .block-info-title {
       padding-bottom: 12px;
       border-bottom: 1px solid;
@@ -50,15 +60,22 @@
     display: flex;
     flex-direction: column;
     row-gap: 12px;
+
+    .block-city {
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+    }
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .block-footer {
     flex-direction: column;
 
     .block-1 {
       width: 100%;
+     
     }
     .block-2 {
       width: 100%;

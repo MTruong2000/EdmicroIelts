@@ -6,7 +6,8 @@ function Banner() {
     <>
       <div className="baner-main">
         <div className="banner-img">
-          <img src="/img/banner.jpg" alt="banner" />
+          <img className="img-pc" src="/img/banner.jpg" alt="banner" />
+          {/* <img className="img-sp" src="/img/banner_sp.jpg" alt="banner" /> */}
         </div>
         <div className="container introduce">
           <div className="block-1 animate__animated animate__backInLeft animate__delay-2s">

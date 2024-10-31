@@ -36,7 +36,7 @@ function Header() {
         </div>
         <div className="block-header-content">
           <div className="block-header-content-left">
-            <a href="/">Homepages</a>
+            <a href="/">Homepage</a>
             <a href="/course">Courses</a>
             <a href="/contact">Contact</a>
             {/* <Link to="/">Homepages</Link> */}
@@ -44,7 +44,7 @@ function Header() {
             <Link to="/contact">Contact</Link> */}
           </div>
           <div className="block-header-content-right">
-            <div className="btn-signin">Sign In</div>
+            <div className="btn-signin">Login</div>
             <div className="btn-signup">Sign Up</div>
           </div>
         </div>
@@ -55,7 +55,7 @@ function Header() {
           {isModalOpen && (
             <div
               className={`animate__animated block-modal-sp ${
-                isModalOpen ? "animate__backInRight" : "animate__bounceOutRight"
+                isModalOpen ? "animate__fadeInRight" : "animate__bounceOutRight"
               } ${!isSticky ? "" : "block-modal-sp-sticky"}`}
             >
               <div className="block-modal-cancel">
@@ -67,7 +67,7 @@ function Header() {
                 <a href="/contact">Contact</a>
               </div>
               <div className="block-modal-sp-signin-signup">
-                <div className="btn-signin">Sign In</div>
+                <div className="btn-signin">Login</div>
                 <div className="btn-signup">Sign Up</div>
               </div>
             </div>
