@@ -81,8 +81,8 @@ function Header({ className }) {
             </div>
           </div>
           <div className="block-header-content-right">
-            <div className="btn-signin">Login</div>
-            <div className="btn-signup">Sign Up</div>
+            <div className="btn-signin"><Link to="/login">Login</Link></div>
+            <div className="btn-signup"><Link to="/sign-up">Sign Up</Link></div>
           </div>
         </div>
 

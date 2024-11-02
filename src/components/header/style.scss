@@ -76,6 +76,11 @@
         border: 1px solid;
         border-radius: 16px;
         padding: 8px 32px;
+
+        a {
+          text-decoration: none;
+          color: var(--text-color-light);
+        }
       }
 
       .btn-signin:hover {
@@ -87,6 +92,11 @@
         padding: 8px 32px;
         color: #000948;
         border-radius: 16px;
+
+        a {
+          text-decoration: none;
+          color: #000948;
+        }
       }
 
       .btn-signup:hover {
