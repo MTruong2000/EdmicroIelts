@@ -6,6 +6,7 @@ import CourseList from "../pages/courselist";
 import CourseDetail from "../pages/coursedetail";
 import Login from "../pages/login";
 import SignUp from "../pages/signup";
+import AccountInfo from "../pages/accountinfo";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/sign-up",
     element: <SignUp />,
+  },
+  {
+    path: "/account-info",
+    element: <AccountInfo />,
   },
   {
     path: "/courses",

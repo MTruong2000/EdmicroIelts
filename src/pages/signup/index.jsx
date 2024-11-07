@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Checkbox from "antd/es/checkbox/Checkbox";
 import { FcGoogle } from "react-icons/fc";
 import "./style.scss";
 
@@ -25,14 +24,8 @@ function SignUp() {
             <label htmlFor="inputPass">Password</label>
             <input id="inputPass" type="password" />
           </div>
-          {/* <div className="radio-remember-forgotpass">
-            <div className="radio-remember">
-              <Checkbox>Remember me</Checkbox>
-            </div>
-            <div className="fotgotpass">Forgot your password?</div>
-          </div> */}
           <div className="btn-login">Sign up</div>
-          <div class="divider">
+          <div className="divider">
             <span>Or continue with</span>
           </div>
           <div className="btn-loginwithgoogle">

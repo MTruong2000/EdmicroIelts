@@ -1,0 +1,147 @@
+.ant-breadcrumb {
+  padding: 10px 80px 0 80px;
+  font-size: 16px;
+
+  li {
+    a {
+      color: var(--text-color-light);
+      text-decoration: none;
+    }
+
+    span {
+      color: var(--text-color-light);
+    }
+  }
+}
+
+.block-account-info {
+  background: #2a2b8e;
+  min-height: 100vh;
+
+  .block-account-info-1 {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    padding: 40px 80px;
+
+    .block-account-info-1-left {
+      flex: 1;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 12px;
+      padding: 32px 0;
+
+      .block-account-info-1-left-upload-file {
+        position: relative;
+
+        .block-account-info-img {
+          width: 200px;
+          height: 200px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+        }
+        .btn-icons-upload {
+          width: fit-content;
+          position: absolute;
+          bottom: 0;
+          right: 8px;
+          font-size: 32px;
+        }
+      }
+
+      .block-account-info-1-left-title {
+        text-align: center;
+
+        h4 {
+          font-weight: bold;
+          font-size: 24px;
+        }
+      }
+    }
+
+    .block-account-info-1-right {
+      flex: 1;
+      background: #fff;
+      padding: 32px;
+      border-radius: 8px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 12px;
+
+      .block-account-title {
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .account-infomation {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+      }
+      .block-account-infomation-block {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+      }
+      .block-account-infomation-btn-blokck {
+        display: flex;
+        justify-content: end;
+        column-gap: 16px;
+
+        .block-account-infomation-btn-update {
+          width: fit-content;
+          padding: 8px 16px;
+          border-radius: 8px;
+          background: #333;
+          color: var(--text-color-light);
+        }
+
+        .block-account-infomation-btn {
+          background: lightgray;
+          width: fit-content;
+          padding: 8px 16px;
+          border-radius: 8px;
+          color: var(--text-color-light);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .block-account-info-1 {
+    flex-direction: column;
+    row-gap: 60px;
+
+    .block-account-info-1-left {
+      width: 100%;
+    }
+
+    .block-account-info-1-right {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 525px) {
+  .block-account-infomation-btn-blokck {
+    flex-direction: column;
+    row-gap: 16px;
+    align-items: center;
+
+    .block-account-infomation-btn-update,
+    .block-account-infomation-btn {
+      width: 100% !important;
+      text-align: center;
+    }
+  }
+}

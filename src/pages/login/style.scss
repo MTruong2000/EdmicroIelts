@@ -1,18 +1,15 @@
 .block-login {
   height: 100vh;
   background: #000948;
-  position: relative;
+  overflow: auto;
 
   .block-form-login {
     background-color: #fff;
     width: 40%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     padding: 32px 24px;
     border-radius: 12px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 50px auto;
 
     h2 {
       text-align: center;

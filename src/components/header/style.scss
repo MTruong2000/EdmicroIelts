@@ -1,3 +1,7 @@
+.ant-dropdown {
+  z-index: 9999;
+}
+
 .block-header {
   background: #000948;
   height: 86px;
@@ -53,8 +57,6 @@
           border-radius: 0;
           border-bottom: 1px solid;
         }
-
-        
       }
       a {
         text-decoration: none;
@@ -81,10 +83,10 @@
           text-decoration: none;
           color: var(--text-color-light);
         }
-      }
 
-      .btn-signin:hover {
-        background: #484e7b;
+        &:hover {
+          background: #484e7b;
+        }
       }
 
       .btn-signup {
@@ -97,10 +99,22 @@
           text-decoration: none;
           color: #000948;
         }
+        &:hover {
+          background: #dfdfdf;
+        }
       }
 
-      .btn-signup:hover {
-        background: #dfdfdf;
+      .block-header-info {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
       }
     }
   }
@@ -170,7 +184,7 @@
   }
 }
 
-.a-custom{
+.a-custom {
   text-decoration: none;
 }
 

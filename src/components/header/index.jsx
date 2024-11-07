@@ -1,29 +1,58 @@
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineCancel } from "react-icons/md";
-import { Button, Dropdown, Menu } from "antd";
+import { Button, Dropdown } from "antd";
 import { useEffect, useState } from "react";
-import "./style.scss";
 import axios from "axios";
+import Cookies from "js-cookie";
+import proFileAvatarPlaceholder from "/img/Profile_avatar_placeholder.png";
+import "./style.scss";
 
 function Header({ className }) {
   const [isSticky, setIsSticky] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [course, setCourse] = useState([]);
   const [items, setItems] = useState([]);
+  const [jwtTokenNew, setJwtTokenNew] = useState("");
+  const [infoAccount, setInfoAccount] = useState({});
+
+  useEffect(() => {
+    const jwtToken = Cookies.get("jwtToken");
+    console.log(jwtToken);
+    const fetchDataAccount = async () => {
+      try {
+        const response = await axios.get(
+          "https://localhost:7193/api/User/Profile",
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        setInfoAccount(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    jwtToken ? setJwtTokenNew(jwtToken) : setJwtTokenNew("");
+    fetchDataAccount();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://localhost:7193/api/Category`);
-        setCourse(response.data);
         const dropdownItems = response.data.map((category) => ({
           key: category.id,
           label: (
-            <Link className="a-custom" to={`/courses?id=${category.id}&name=${category.name}`}>
+            <Link
+              className="a-custom"
+              to={`/courses?id=${category.id}&name=${category.name}`}
+            >
               {category.name}
             </Link>
-          )
+          ),
         }));
         setItems(dropdownItems);
       } catch (error) {
@@ -54,13 +83,34 @@ function Header({ className }) {
   const cancelModal = () => {
     setIsModalOpen(false);
   };
-  const courseDOM = (
-    <Menu>
-      {course.map((item) => (
-        <Menu.Item key={item.id}>{item.name}</Menu.Item>
-      ))}
-    </Menu>
-  );
+
+  const itemsInfo = [
+    {
+      key: "1",
+      label: (
+        <Link className="a-custom" to={`/account-info`}>
+          Thông tin tài khoản
+        </Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Link className="a-custom" to={`/registered-courses`}>
+          Các khóa học đã đăng ký
+        </Link>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Link className="a-custom" to={`/logout`}>
+          Đăng xuất
+        </Link>
+      ),
+    },
+  ];
+  console.log(jwtTokenNew);
   return (
     <>
       <div className={`block-header ${className} ${isSticky ? "sticky" : ""}`}>
@@ -81,8 +131,30 @@ function Header({ className }) {
             </div>
           </div>
           <div className="block-header-content-right">
-            <div className="btn-signin"><Link to="/login">Login</Link></div>
-            <div className="btn-signup"><Link to="/sign-up">Sign Up</Link></div>
+            {jwtTokenNew ? (
+              <div className="block-header-info">
+                <p>{infoAccount.fullName}</p>
+                <Dropdown menu={{ items: itemsInfo }} trigger={["click"]}>
+                  <img
+                    src={
+                      infoAccount.imageUrl
+                        ? infoAccount.imageUrl
+                        : proFileAvatarPlaceholder
+                    }
+                    alt="User Profile"
+                  />
+                </Dropdown>
+              </div>
+            ) : (
+              <>
+                <div className="btn-signin">
+                  <Link to="/login">Login</Link>
+                </div>
+                <div className="btn-signup">
+                  <Link to="/sign-up">Sign Up</Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -99,14 +171,24 @@ function Header({ className }) {
                 <MdOutlineCancel onClick={cancelModal} />
               </div>
               <div className="block-modal-sp-link">
-                <a href="/">Homepages</a>
-                <a href="/course">Courses</a>
+                <Link to="/">Homepage</Link>
+                <Dropdown
+                  menu={{ items }}
+                  placement="bottom"
+                  trigger={["click"]}
+                >
+                  <Button className="btn-custom-antd">Courses</Button>
+                </Dropdown>
                 <a href="/contact">Contact</a>
               </div>
-              <div className="block-modal-sp-signin-signup">
-                <div className="btn-signin">Login</div>
-                <div className="btn-signup">Sign Up</div>
-              </div>
+              {jwtTokenNew ? (
+                <></>
+              ) : (
+                <div className="block-modal-sp-signin-signup">
+                  <div className="btn-signin">Login</div>
+                  <div className="btn-signup">Sign Up</div>
+                </div>
+              )}
             </div>
           )}
         </div>
