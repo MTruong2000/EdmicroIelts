@@ -7,6 +7,11 @@ import CourseDetail from "../pages/coursedetail";
 import Login from "../pages/login";
 import SignUp from "../pages/signup";
 import AccountInfo from "../pages/accountinfo";
+import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import RequireAuth from "../auth/requireauth";
+
+const jwtToken = Cookies.get("jwtToken");
 
 const router = createBrowserRouter([
   {
@@ -27,7 +32,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/account-info",
-    element: <AccountInfo />,
+    element: (
+      <RequireAuth>
+        <AccountInfo />
+      </RequireAuth>
+    ),
   },
   {
     path: "/courses",

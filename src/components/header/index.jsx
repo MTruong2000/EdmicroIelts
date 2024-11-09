@@ -17,7 +17,6 @@ function Header({ className }) {
 
   useEffect(() => {
     const jwtToken = Cookies.get("jwtToken");
-    console.log(jwtToken);
     const fetchDataAccount = async () => {
       try {
         const response = await axios.get(
@@ -29,7 +28,6 @@ function Header({ className }) {
           }
         );
         setInfoAccount(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -110,7 +108,6 @@ function Header({ className }) {
       ),
     },
   ];
-  console.log(jwtTokenNew);
   return (
     <>
       <div className={`block-header ${className} ${isSticky ? "sticky" : ""}`}>
