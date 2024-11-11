@@ -10,12 +10,11 @@ const RequireAuth = ({ children }) => {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const repo = await axios.get("https://localhost:7193/api/User/Profile", {
+        await axios.get(`${import.meta.env.VITE_DOMAIN}api/User/Profile`, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
           },
         });
-        console.log(repo)
         setIsAuthenticated(true);
       } catch (error) {
         setIsAuthenticated(false);

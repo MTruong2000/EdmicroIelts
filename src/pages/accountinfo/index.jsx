@@ -16,7 +16,13 @@ function AccountInfo() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [role, setRole] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [isCheckEditProfile, setIsCheckEditProfile] = useState(false);
   const [isCheckEditPassword, setIsCheckEditPassword] = useState(false);
 
@@ -25,7 +31,7 @@ function AccountInfo() {
     const fetchDataAccount = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7193/api/User/Profile",
+          `${import.meta.env.VITE_DOMAIN}api/User/Profile`,
           {
             headers: {
               Authorization: `Bearer ${jwtToken}`,
@@ -37,6 +43,13 @@ function AccountInfo() {
         setEmail(response.data.email);
         setPhoneNumber(response.data.phoneNumber);
         setImageUrl(response.data.imageUrl);
+        if (response.data.roleId == 1) {
+          setRole("Student");
+        } else if (response.data.roleId == 2) {
+          setRole("Teacher");
+        } else {
+          setRole("Admin");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +67,7 @@ function AccountInfo() {
     };
     try {
       const response = await axios.put(
-        `https://localhost:7193/api/User/updateAccount`,
+        `${import.meta.env.VITE_DOMAIN}api/User/updateAccount`,
         params,
         {
           headers: {
@@ -82,6 +95,45 @@ function AccountInfo() {
     }
   };
 
+  const handleChangePassWord = async () => {
+    const jwtToken = Cookies.get("jwtToken");
+    const params = {
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    };
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_DOMAIN}api/User/ChangePassword`,
+        params,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setIsCheckEditPassword((prev) => !prev);
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (error) {
+      Swal.fire({
+        title: "Change Password Fail ?",
+        text: error.response.data.message
+          ? error.response.data.message
+          : error.response.data.errors.ConfirmPassword,
+        icon: "error",
+      });
+    }
+  };
+
   const handleFileChange = async (e) => {
     const jwtToken = Cookies.get("jwtToken");
     const file = e.target.files[0];
@@ -91,7 +143,7 @@ function AccountInfo() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7193/api/User/UploadAvatar",
+          `${import.meta.env.VITE_DOMAIN}api/User/UploadAvatar`,
           formData,
           {
             headers: {
@@ -143,7 +195,7 @@ function AccountInfo() {
             </div>
             <div className="block-account-info-1-left-title">
               <h4>{fullNameTitle}</h4>
-              <p>Teacher</p>
+              <p>{role}</p>
             </div>
           </div>
           <div className="block-account-info-1-right">
@@ -215,42 +267,50 @@ function AccountInfo() {
                 />
               )}
             </div>
-
-            {isCheckEditPassword && (
-              <>
-                <div className="block-account-infomation-block">
-                  <p>Current Passwordr</p>
-                  <Input.Password
-                    placeholder="Enter your current password"
-                    iconRender={(visible) =>
-                      visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                    }
-                  />
-                </div>
-                <div className="block-account-infomation-block">
-                  <p>New Password</p>
-                  <Input.Password
-                    placeholder="Enter your current password"
-                    iconRender={(visible) =>
-                      visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                    }
-                  />
-                </div>
-                <div className="block-account-infomation-block">
-                  <p>Confirm New Password</p>
-                  <Input.Password
-                    placeholder="Enter your current password"
-                    iconRender={(visible) =>
-                      visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                    }
-                  />
-                </div>
-              </>
-            )}
+            <div className="block-account-infomation-block">
+              <p>Current Passwordr</p>
+              <Input.Password
+                placeholder="Enter your current password"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                disabled={!isCheckEditPassword}
+              />
+            </div>
+            <div className="block-account-infomation-block">
+              <p>New Password</p>
+              <Input.Password
+                placeholder="Enter your current password"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                disabled={!isCheckEditPassword}
+              />
+            </div>
+            <div className="block-account-infomation-block">
+              <p>Confirm New Password</p>
+              <Input.Password
+                placeholder="Enter your current password"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                disabled={!isCheckEditPassword}
+              />
+            </div>
+            {isCheckEditPassword && <></>}
 
             {isCheckEditPassword && (
               <div className="block-account-infomation-btn-blokck">
-                <div className="block-account-infomation-btn-update">
+                <div
+                  className="block-account-infomation-btn-update"
+                  onClick={handleChangePassWord}
+                >
                   Update Password
                 </div>
                 <div

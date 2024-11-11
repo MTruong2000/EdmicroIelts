@@ -3,54 +3,68 @@ import Header from "../../components/header";
 import { CiClock2 } from "react-icons/ci";
 import { FaCheck } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./style.scss";
 
 function CourseDetail() {
+  const [courseDetail, setCourseDetail] = useState({});
+  const [courseContent, setCourseContent] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_DOMAIN}api/Course/${id}`
+        );
+        console.log(23);
+
+        setCourseDetail(response.data);
+        setCourseContent(response.data.courseContent.split("|"));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log(courseDetail);
+  console.log(courseContent);
+
   return (
     <>
       <Header className="block-header-courses" />
       <div className="container block-coursedetail">
         <div className="block-coursedetail-img">
-          <img
-            src="https://edmicro.edu.vn/wp-content/uploads/2023/07/ielts-junior-01.jpg"
-            alt="img"
-          />
+          <img src={courseDetail.imageLink} alt="img" />
         </div>
         <div className="block-course-detail-header">
           <div className="block-couse-details-title">
             <p className="p-title">KHÓA HỌC TIẾNG ANH</p>
-            <h1>Tiếng Anh giao tiếp cho người mới bắt đầu</h1>
+            <h1>{courseDetail.title}</h1>
           </div>
-          <div className="block-couse-details-price">2.500.000</div>
+          <div className="block-couse-details-price">
+            {courseDetail && typeof courseDetail.price === "number"
+              ? courseDetail.price.toLocaleString("it-IT")
+              : "Price not available"}
+          </div>
         </div>
         <div className="block-course-detail-body">
-          <p>
-            Khóa học này được thiết kế đặc biệt cho những người mới bắt đầu học
-            tiếng Anh. Bạn sẽ học cách giao tiếp hiệu quả trong các tình huống
-            hằng ngày, từ chào hỏi đến đặt món ăn tại nhà hàng
-          </p>
+          <p>{courseDetail.description}</p>
           <div className="block-course-detail-body-time">
             <CiClock2 />
             <span>8 tuần</span>
           </div>
           <div className="block-course-detail-content">
             <h1>Nội dung khóa học</h1>
-            <div className="block-content-course">
-              <FaCheck className="icons-check" />
-              <p>Phát âm và ngữ điệu cơ bản</p>
-            </div>
-            <div className="block-content-course">
-              <FaCheck className="icons-check" />
-              <p>Phát âm và ngữ điệu cơ bản</p>
-            </div>
-            <div className="block-content-course">
-              <FaCheck className="icons-check" />
-              <p>Phát âm và ngữ điệu cơ bản</p>
-            </div>
-            <div className="block-content-course">
-              <FaCheck className="icons-check" />
-              <p>Phát âm và ngữ điệu cơ bản</p>
-            </div>
+            {courseContent.map((item, index) => (
+              <div className="block-content-course" key={index}>
+                <FaCheck className="icons-check" />
+                <p>{item}</p>
+              </div>
+            ))}
           </div>
           <div className="block-course-btn">
             <div className="btn-resgister-now">Đăng ký ngay</div>

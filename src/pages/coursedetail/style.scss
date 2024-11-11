@@ -157,12 +157,15 @@
     row-gap: 16px;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+
     .block {
       background: #fff;
       padding: 12px 16px;
       border-radius: 4px;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
         rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+      width: 100%;
 
       .info-students {
         padding: 12px 0;

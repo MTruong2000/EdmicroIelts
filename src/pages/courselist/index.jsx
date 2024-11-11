@@ -21,9 +21,8 @@ function CourseList() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7193/api/Category/${id}/Courses`
+          `${import.meta.env.VITE_DOMAIN}api/Category/${id}/Courses`
         );
-        console.log(response.data);
         setCourseList(response.data);
       } catch (error) {
         console.log(error);
@@ -47,10 +46,7 @@ function CourseList() {
             {courseList.map((item) => (
               <div className="block-course-card" key={item.id}>
                 <div className="block-course-img">
-                  <img
-                    src="https://edmicro.edu.vn/assets/study-path/1.jpg"
-                    alt="card"
-                  />
+                  <img src={item.imageLink} alt="course-detail" />
                 </div>
                 <div className="block-course-desc">
                   <div className="block-title">{item.title}</div>
@@ -65,7 +61,6 @@ function CourseList() {
                       >
                         Xem chi tiết
                       </Link>
-                      
                     </div>
                   </div>
                 </div>

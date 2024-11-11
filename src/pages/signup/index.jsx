@@ -30,7 +30,7 @@ function SignUp() {
 
     try {
       const response = await axios.post(
-        `https://localhost:7193/api/User/Register`,
+        `${import.meta.env.VITE_DOMAIN}api/User/Register`,
         params
       );
 

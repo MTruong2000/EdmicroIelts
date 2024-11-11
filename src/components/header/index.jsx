@@ -20,7 +20,7 @@ function Header({ className }) {
     const fetchDataAccount = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7193/api/User/Profile",
+          `${import.meta.env.VITE_DOMAIN}api/User/Profile`,
           {
             headers: {
               Authorization: `Bearer ${jwtToken}`,
@@ -40,7 +40,9 @@ function Header({ className }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://localhost:7193/api/Category`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_DOMAIN}api/Category`
+        );
         const dropdownItems = response.data.map((category) => ({
           key: category.id,
           label: (

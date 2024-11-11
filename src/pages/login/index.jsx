@@ -17,9 +17,10 @@ function Login() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        `https://localhost:7193/api/User/Login?email=${email}&password=${passWord}`
+        `${
+          import.meta.env.VITE_DOMAIN
+        }api/User/Login?email=${email}&password=${passWord}`
       );
-      console.log(response);
 
       const expirationDate = new Date(
         response.data.token.refreshTokenExpiration
