@@ -58,9 +58,9 @@ function SignUp() {
     <>
       <div className="block-login">
         <div className="block-form-login">
-          <h2>Create an account</h2>
+          <h2>Tạo tài khoản</h2>
           <div className="form-input">
-            <label htmlFor="inputFullName">Full Name</label>
+            <label htmlFor="inputFullName">Họ và tên</label>
             <input
               id="inputFullName"
               type="text"
@@ -69,7 +69,7 @@ function SignUp() {
             />
           </div>
           <div className="form-input">
-            <label htmlFor="inputEmail">Email address</label>
+            <label htmlFor="inputEmail">Email</label>
             <input
               id="inputEmail"
               type="email"
@@ -78,7 +78,7 @@ function SignUp() {
             />
           </div>
           <div className="form-input">
-            <label htmlFor="inputPhoneNumber">Phone Number</label>
+            <label htmlFor="inputPhoneNumber">Số điện thoại</label>
             <input
               id="inputPhoneNumber"
               type="text"
@@ -92,7 +92,7 @@ function SignUp() {
             />
           </div>
           <div className="form-input">
-            <label htmlFor="inputPass">Password</label>
+            <label htmlFor="inputPass">Mật khẩu</label>
             <input
               id="inputPass"
               type="password"
@@ -101,20 +101,20 @@ function SignUp() {
             />
           </div>
           <div className="btn-login" onClick={handleSignUp}>
-            Sign up
+            Đăng ký
           </div>
           <div className="divider">
-            <span>Or continue with</span>
+            <span>Hoặc</span>
           </div>
           <div className="btn-loginwithgoogle">
             <FcGoogle />
-            <p>Sign up with Google</p>
+            <p>Đăng nhập với Google</p>
           </div>
           <div className="direct-siginup">
             <Link className="direct-siginup-link" to="/login">
-              Already have an account?{" "}
+              Bạn đã có tài khoản?{" "}
               <span style={{ color: "#000948", fontWeight: "bold" }}>
-                Login here
+                Đăng nhập ngay
               </span>
             </Link>
           </div>

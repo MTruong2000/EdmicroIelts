@@ -10,6 +10,7 @@ import AccountInfo from "../pages/accountinfo";
 import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import RequireAuth from "../auth/requireauth";
+import EnrolledCourse from "../pages/enrolledcourses";
 
 const jwtToken = Cookies.get("jwtToken");
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/courses/:id",
     element: <CourseDetail />,
+  },
+  {
+    path: "/enrolled-courses",
+    element: <EnrolledCourse />,
   },
   {
     path: "*",

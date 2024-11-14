@@ -57,44 +57,46 @@ function Login() {
     <>
       <div className="block-login">
         <div className="block-form-login">
-          <h2>Login</h2>
+          <h2>Đăng nhập</h2>
           <div className="form-input">
-            <label htmlFor="inputEmail">Email address</label>
+            <label htmlFor="inputEmail">Email đăng nhập</label>
             <input
               id="inputEmail"
+              placeholder="Email đăng nhập"
               type="email"
               onBlur={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-input">
-            <label htmlFor="inputPass">Password</label>
+            <label htmlFor="inputPass">Mật khẩu</label>
             <input
               id="inputPass"
+              placeholder="Mật khẩu"
               type="password"
               onBlur={(e) => setPassWord(e.target.value)}
             />
           </div>
           <div className="radio-remember-forgotpass">
             <div className="radio-remember">
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox>Tự động đăng nhập</Checkbox>
             </div>
-            <div className="fotgotpass">Forgot your password?</div>
+            <div className="fotgotpass">Quên mật khẩu?</div>
           </div>
           <div className="btn-login" onClick={handleLogin}>
-            Login
+            Đăng nhập
           </div>
           <div className="divider">
-            <span>Or continue with</span>
+            <span>Hoặc</span>
           </div>
           <div className="btn-loginwithgoogle">
             <FcGoogle />
-            <p>Login with Google</p>
+            <p>Đăng nhập với Google</p>
           </div>
           <div className="direct-siginup">
             <Link className="direct-siginup-link" to="/sign-up">
-              Don't have an account?{" "}
+              Bạn chưa có tài khoản?{" "}
               <span style={{ color: "#000948", fontWeight: "bold" }}>
-                Sign up here
+                Đăng ký ngay
               </span>
             </Link>
           </div>

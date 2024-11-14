@@ -1,11 +1,10 @@
-import AboutUs from '../../components/aboutus'
-import Banner from '../../components/banner'
-import Discover from '../../components/discover'
-import Feedback from '../../components/feedback'
+import AboutUs from "../../components/aboutus";
+import Banner from "../../components/banner";
+import Discover from "../../components/discover";
+import Feedback from "../../components/feedback";
 import Header from "../../components/header/index.jsx";
 import Footer from "../../components/footer/index.jsx";
-
-import './style.scss'
+import "./style.scss";
 
 function Home() {
   return (
@@ -15,10 +14,9 @@ function Home() {
       <AboutUs />
       <Discover />
       <Feedback />
-    <Footer />
-
+      <Footer />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;
