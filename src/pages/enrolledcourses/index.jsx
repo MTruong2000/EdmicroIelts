@@ -1,15 +1,23 @@
 import Footer from "../../components/footer";
 import Header from "../../components/header";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
 function EnrolledCourse() {
+  const navigate = useNavigate();
+  const handleDirectLesson = () => {
+    navigate("/enrolled-courses/lesson");
+  };
   return (
     <>
       <Header className="block-header-courses" />
       <div className="container block-enrolled-courses-parent">
         <h2>Enrolled Courses</h2>
         <div className="block-enrolled-courses">
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>
@@ -18,7 +26,10 @@ function EnrolledCourse() {
               <p>Jane Doe</p>
             </div>
           </div>
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>
@@ -27,7 +38,10 @@ function EnrolledCourse() {
               <p>Jane Doe</p>
             </div>
           </div>
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>
@@ -36,7 +50,10 @@ function EnrolledCourse() {
               <p>Jane Doe</p>
             </div>
           </div>
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>
@@ -45,7 +62,10 @@ function EnrolledCourse() {
               <p>Jane Doe</p>
             </div>
           </div>
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>
@@ -54,7 +74,10 @@ function EnrolledCourse() {
               <p>Jane Doe</p>
             </div>
           </div>
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>
@@ -63,34 +86,10 @@ function EnrolledCourse() {
               <p>Jane Doe</p>
             </div>
           </div>
-          <div className="block-enrolled-courses-div">
-            <div className="block-enrolled-courses-div-img">
-              <img src="/img/img-default.jfif" alt="img-course" />
-            </div>
-            <div className="block-enrolled-courses-div-content">
-              <h4>Introduction to React</h4>
-              <p>Jane Doe</p>
-            </div>
-          </div>
-          <div className="block-enrolled-courses-div">
-            <div className="block-enrolled-courses-div-img">
-              <img src="/img/img-default.jfif" alt="img-course" />
-            </div>
-            <div className="block-enrolled-courses-div-content">
-              <h4>Introduction to React</h4>
-              <p>Jane Doe</p>
-            </div>
-          </div>
-          <div className="block-enrolled-courses-div">
-            <div className="block-enrolled-courses-div-img">
-              <img src="/img/img-default.jfif" alt="img-course" />
-            </div>
-            <div className="block-enrolled-courses-div-content">
-              <h4>Introduction to React</h4>
-              <p>Jane Doe</p>
-            </div>
-          </div>
-          <div className="block-enrolled-courses-div">
+          <div
+            className="block-enrolled-courses-div"
+            onClick={handleDirectLesson}
+          >
             <div className="block-enrolled-courses-div-img">
               <img src="/img/img-default.jfif" alt="img-course" />
             </div>

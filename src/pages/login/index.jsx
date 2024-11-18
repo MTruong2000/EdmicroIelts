@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-import "./style.scss";
 import Swal from "sweetalert2";
+import "./style.scss";
 
 function Login() {
   const navigate = useNavigate();

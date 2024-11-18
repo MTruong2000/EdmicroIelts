@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import { MdOutlineCancel } from "react-icons/md";
 import { Button, Dropdown } from "antd";
@@ -7,6 +7,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import proFileAvatarPlaceholder from "/img/Profile_avatar_placeholder.png";
 import Loading from "../loading";
+import Swal from "sweetalert2";
 import "./style.scss";
 
 function Header({ className }) {
@@ -16,6 +17,7 @@ function Header({ className }) {
   const [items, setItems] = useState([]);
   const [jwtTokenNew, setJwtTokenNew] = useState("");
   const [infoAccount, setInfoAccount] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -91,6 +93,56 @@ function Header({ className }) {
     setIsModalOpen(false);
   };
 
+  const handleLogout = async () => {
+    const jwtToken = Cookies.get("jwtToken");
+    const refreshToken = Cookies.get("refreshToken");
+
+    try {
+      const response = await axios.post(
+        `${
+          import.meta.env.VITE_DOMAIN
+        }api/User/Logout?refreshToken=${refreshToken}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: response.data,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      const cookies = document.cookie.split(";");
+
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+
+        document.cookie =
+          name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+      }
+      setJwtTokenNew("");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      Swal.fire({
+        title: "Login Fail ?",
+        text: error.response.data,
+        icon: "error",
+      });
+      console.error("Login error:", error.response.data);
+    }
+  };
+
   const itemsInfo = [
     {
       key: "1",
@@ -111,7 +163,7 @@ function Header({ className }) {
     {
       key: "3",
       label: (
-        <Link className="a-custom" to={`/logout`}>
+        <Link className="a-custom" to="#" onClick={handleLogout}>
           Đăng xuất
         </Link>
       ),
