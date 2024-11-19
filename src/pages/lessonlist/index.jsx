@@ -2,22 +2,87 @@ import Footer from "../../components/footer";
 import Header from "../../components/header";
 import ReactPlayer from "react-player/youtube";
 import YouTube from "react-youtube";
+import { Player } from "video-react";
 import { GrLinkPrevious } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
 import { SiTicktick } from "react-icons/si";
 import { FaRegCircle } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 import "./style.scss";
 
 function LessionList() {
+  const [searchParams] = useSearchParams();
   const [isShowList, setIsShowList] = useState(false);
+  const [listLesson, setLissLesson] = useState([]);
+  const [activeLessson, setActiveLesson] = useState("");
+  const [videoLessDetail, setVideoLessDetail] = useState({});
+
+  const titleCourse = searchParams.get("title");
+
+  useEffect(() => {
+    const jwtToken = Cookies.get("jwtToken");
+    const courseId = searchParams.get("courseId");
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_DOMAIN}api/Lesson/LessonProgress/${courseId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        setLissLesson(response.data);
+        if (response.data) {
+          const firstIncompleteLesson = response.data.find(
+            (item) => !item.isCompleted
+          );
+          if (firstIncompleteLesson) {
+            setActiveLesson(firstIncompleteLesson.id);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleGetVideo = async (courseId) => {
+    console.log(courseId);
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_DOMAIN}api/LessonVideo/Lesson/${courseId}`
+      );
+      response.data && response.data.length > 0
+        ? setVideoLessDetail(response.data[0])
+        : setVideoLessDetail({});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGetLessonVideo = (lessonId) => {
+    handleGetVideo(lessonId);
+  };
+
+  useEffect(() => {
+    handleGetLessonVideo(activeLessson);
+  }, [activeLessson]);
+
+  console.log(videoLessDetail);
+  console.log(listLesson);
   return (
     <>
       <Header className="block-header-courses" />
       <div className="container block-body-lesson">
-        <div className="block-body-lesson-title">
-          Advanced JavaScript Techniques
-        </div>
+        <div className="block-body-lesson-title">{titleCourse}</div>
         <div className="block-body-lesson-desc">
           <div
             className={`block-body-lesson-desc-video-img ${
@@ -25,12 +90,9 @@ function LessionList() {
             }`}
           >
             <div className="block-body-lesson-desc-video-img-player">
-              {/* <iframe
-                className="player-block"
-                src="https://drive.google.com/file/d/19Le4T9EU3oWdLGPbqT-UmGf7B5abkMSF/view?usp=drive_link"
-                allow="autoplay"
-              ></iframe> */}
-              <YouTube className="player-block" videoId="sNqfQZI9WdU" />
+              <Player key={videoLessDetail.videoUrl} className="player-block">
+                <source src={videoLessDetail.videoUrl} />
+              </Player>
               {isShowList && (
                 <div
                   className="gr-link-previous"
@@ -41,7 +103,6 @@ function LessionList() {
                   <GrLinkPrevious />
                 </div>
               )}
-              {/* <ReactPlayer className="player-block" url="https://drive.google.com/file/d/19Le4T9EU3oWdLGPbqT-UmGf7B5abkMSF/view" /> */}
             </div>
             <p>Basic Concepts</p>
           </div>
@@ -56,34 +117,34 @@ function LessionList() {
                 />
               </div>
               <div className="block-body-lesson-desc-list-lesson-list-lesson">
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <SiTicktick className="color-success" />
-                  <p>Introduction to the Course</p>
-                </div>
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <SiTicktick className="color-success" />
-                  <p>Introduction to the Course</p>
-                </div>
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <SiTicktick className="color-success" />
-                  <p>Introduction to the Course</p>
-                </div>
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <FaRegCircle />
-                  <p>Introduction to the Course</p>
-                </div>
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <FaRegCircle />
-                  <p>Introduction to the Course</p>
-                </div>
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <FaRegCircle />
-                  <p>Introduction to the Course</p>
-                </div>
-                <div className="block-body-lesson-desc-list-lesson-list-lesson-item">
-                  <FaRegCircle />
-                  <p>Introduction to the Course</p>
-                </div>
+                {listLesson.map((item, index) => {
+                  const isFirstIncomplete =
+                    item.isCompleted === false &&
+                    listLesson.findIndex(
+                      (lesson) => lesson.isCompleted === false
+                    ) === index;
+
+                  return (
+                    <div
+                      key={item.id}
+                      className={`block-body-lesson-desc-list-lesson-list-lesson-item ${
+                        isFirstIncomplete ? "active-lesson" : ""
+                      }`}
+                      onClick={() => handleGetVideo(item.id)}
+                    >
+                      <div className="lesson-icons">
+                        {item.isCompleted ? (
+                          <SiTicktick className="color-success" />
+                        ) : (
+                          <FaRegCircle />
+                        )}
+                      </div>
+                      <div className="lesson-title">
+                        <p>{item.title}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

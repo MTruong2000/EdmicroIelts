@@ -50,11 +50,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/enrolled-courses",
-    element: <EnrolledCourse />,
+    element: (
+      <RequireAuth>
+        <EnrolledCourse />
+      </RequireAuth>
+    ),
   },
   {
     path: "/enrolled-courses/lesson",
-    element: <LessionList />,
+    element: (
+      <RequireAuth>
+        <LessionList />
+      </RequireAuth>
+    ),
   },
   {
     path: "*",
