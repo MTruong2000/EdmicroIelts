@@ -1,13 +1,11 @@
 import Footer from "../../components/footer";
 import Header from "../../components/header";
-import ReactPlayer from "react-player/youtube";
-import YouTube from "react-youtube";
 import { Player } from "video-react";
 import { GrLinkPrevious } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
 import { SiTicktick } from "react-icons/si";
 import { FaRegCircle } from "react-icons/fa";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -19,43 +17,40 @@ function LessionList() {
   const [listLesson, setLissLesson] = useState([]);
   const [activeLessson, setActiveLesson] = useState("");
   const [videoLessDetail, setVideoLessDetail] = useState({});
+  const [activeLessonId, setActiveLessonId] = useState(null);
 
   const titleCourse = searchParams.get("title");
-
-  useEffect(() => {
+  const fetchData = async () => {
     const jwtToken = Cookies.get("jwtToken");
     const courseId = searchParams.get("courseId");
-
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_DOMAIN}api/Lesson/LessonProgress/${courseId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          }
-        );
-        setLissLesson(response.data);
-        if (response.data) {
-          const firstIncompleteLesson = response.data.find(
-            (item) => !item.isCompleted
-          );
-          if (firstIncompleteLesson) {
-            setActiveLesson(firstIncompleteLesson.id);
-          }
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_DOMAIN}api/Lesson/LessonProgress/${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
         }
-      } catch (error) {
-        console.log(error);
+      );
+      setLissLesson(response.data);
+      if (response.data) {
+        const firstIncompleteLesson = response.data.find(
+          (item) => !item.isCompleted
+        );
+        if (firstIncompleteLesson) {
+          setActiveLesson(firstIncompleteLesson.id);
+        }
       }
-    };
-
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
 
   const handleGetVideo = async (courseId) => {
-    console.log(courseId);
-
+    setActiveLessonId(courseId);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_DOMAIN}api/LessonVideo/Lesson/${courseId}`
@@ -76,8 +71,28 @@ function LessionList() {
     handleGetLessonVideo(activeLessson);
   }, [activeLessson]);
 
-  console.log(videoLessDetail);
-  console.log(listLesson);
+  const handleSaveProgress = async () => {
+    const jwtToken = Cookies.get("jwtToken");
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_DOMAIN}api/Lesson/SaveProgress/${
+          videoLessDetail.lessonId
+        }`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+      response.status === 200 ? fetchData() : null;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
     <>
       <Header className="block-header-courses" />
@@ -90,7 +105,11 @@ function LessionList() {
             }`}
           >
             <div className="block-body-lesson-desc-video-img-player">
-              <Player key={videoLessDetail.videoUrl} className="player-block">
+              <Player
+                key={videoLessDetail.videoUrl}
+                className="player-block"
+                onEnded={handleSaveProgress}
+              >
                 <source src={videoLessDetail.videoUrl} />
               </Player>
               {isShowList && (
@@ -118,6 +137,8 @@ function LessionList() {
               </div>
               <div className="block-body-lesson-desc-list-lesson-list-lesson">
                 {listLesson.map((item, index) => {
+                  const isActive = activeLessonId === item.id;
+
                   const isFirstIncomplete =
                     item.isCompleted === false &&
                     listLesson.findIndex(
@@ -128,9 +149,14 @@ function LessionList() {
                     <div
                       key={item.id}
                       className={`block-body-lesson-desc-list-lesson-list-lesson-item ${
-                        isFirstIncomplete ? "active-lesson" : ""
+                        isActive ? "active-lesson" : ""
                       }`}
-                      onClick={() => handleGetVideo(item.id)}
+                      onClick={
+                        item.isCompleted || isFirstIncomplete
+                          ? () => handleGetVideo(item.id)
+                          : undefined
+                      }
+                      id={item.id}
                     >
                       <div className="lesson-icons">
                         {item.isCompleted ? (

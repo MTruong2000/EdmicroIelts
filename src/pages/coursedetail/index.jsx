@@ -19,7 +19,6 @@ function CourseDetail() {
         const response = await axios.get(
           `${import.meta.env.VITE_DOMAIN}api/Course/${id}`
         );
-        console.log(23);
 
         setCourseDetail(response.data);
         setCourseContent(response.data.courseContent.split("|"));
@@ -30,9 +29,6 @@ function CourseDetail() {
 
     fetchData();
   }, []);
-  console.log(courseDetail);
-  console.log(courseContent);
-
   return (
     <>
       <Header className="block-header-courses" />
@@ -74,13 +70,10 @@ function CourseDetail() {
           <h2>Giảng viên</h2>
           <div className="info-teacher">
             <div className="block-img-teacher">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrSf5enQVu3VuLkvA6iXZ3SFv0fNgDFY43u-C3e3-nwmu5HwScxXHags4k6bdNOOZ78T8&usqp=CAU"
-                alt="avatar"
-              />
+              <img src={courseDetail.imageLink} alt="avatar" />
             </div>
             <div className="block-content-teacher">
-              <h5>Nguyễn Văn A</h5>
+              <h5>{courseDetail.teacherName}</h5>
               <p>Giảng viên tiếng Anh với hơn 10 năm kinh nghiệm</p>
             </div>
           </div>
