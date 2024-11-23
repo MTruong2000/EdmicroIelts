@@ -123,7 +123,6 @@ function LessionList() {
                 </div>
               )}
             </div>
-            <p>Basic Concepts</p>
           </div>
           {!isShowList && (
             <div className="block-body-lesson-desc-list-lesson">

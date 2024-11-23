@@ -12,8 +12,19 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
-
+  const handleResetPassword = ()=>{
+    navigate("/request-password");
+  };
   const handleLogin = async () => {
+    if (email == "" || passWord == "") {
+      Swal.fire({
+        title: "Warning ?",
+        text: "Please enter information",
+        icon: "warning",
+      });
+      return;
+    }
+
     try {
       const response = await axios.post(
         `${
@@ -79,7 +90,7 @@ function Login() {
             <div className="radio-remember">
               <Checkbox>Tự động đăng nhập</Checkbox>
             </div>
-            <div className="fotgotpass">Quên mật khẩu?</div>
+            <div className="fotgotpass" onClick={handleResetPassword}>Quên mật khẩu?</div>
           </div>
           <div className="btn-login" onClick={handleLogin}>
             Đăng nhập

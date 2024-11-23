@@ -7,11 +7,12 @@ import CourseDetail from "../pages/coursedetail";
 import Login from "../pages/login";
 import SignUp from "../pages/signup";
 import AccountInfo from "../pages/accountinfo";
-import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import RequireAuth from "../auth/requireauth";
 import EnrolledCourse from "../pages/enrolledcourses";
 import LessionList from "../pages/lessonlist";
+import RequestPassword from "../pages/requestpassword";
+import ResetPassword from "../pages/resetpassword";
 
 const jwtToken = Cookies.get("jwtToken");
 
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
   {
     path: "/courses/:id",
     element: <CourseDetail />,
+  },
+  {
+    path: "/request-password",
+    element: <RequestPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
   },
   {
     path: "/enrolled-courses",

@@ -3,9 +3,10 @@ import Header from "../../components/header";
 import { CiClock2 } from "react-icons/ci";
 import { FaCheck } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import proFileAvatarPlaceholder from "/img/Profile_avatar_placeholder.png";
+import axios from "axios";
 import "./style.scss";
 
 function CourseDetail() {
@@ -29,6 +30,7 @@ function CourseDetail() {
 
     fetchData();
   }, []);
+  
   return (
     <>
       <Header className="block-header-courses" />
@@ -70,7 +72,9 @@ function CourseDetail() {
           <h2>Giảng viên</h2>
           <div className="info-teacher">
             <div className="block-img-teacher">
-              <img src={courseDetail.imageLink} alt="avatar" />
+              <img src={courseDetail.teacherImageUrl
+                ? courseDetail.teacherImageUrl
+                : proFileAvatarPlaceholder} alt="avatar" />
             </div>
             <div className="block-content-teacher">
               <h5>{courseDetail.teacherName}</h5>

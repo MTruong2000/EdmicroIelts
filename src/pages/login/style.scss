@@ -57,6 +57,10 @@
       .fotgotpass {
         color: #000948;
         font-weight: bold;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
     .btn-login {
