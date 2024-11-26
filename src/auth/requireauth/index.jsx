@@ -4,8 +4,9 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 const RequireAuth = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null); // trạng thái xác thực ban đầu là null
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
   const jwtToken = Cookies.get("jwtToken");
+  const refreshToken = Cookies.get("refreshToken");
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -17,7 +18,26 @@ const RequireAuth = ({ children }) => {
         });
         setIsAuthenticated(true);
       } catch (error) {
-        setIsAuthenticated(false);
+        console.log(error);
+        const response = await axios.post(
+          `${
+            import.meta.env.VITE_DOMAIN
+          }api/User/RefreshJwt?refreshToken=${refreshToken}`
+        );
+
+        const expirationDate = new Date(
+          response.data.token.refreshTokenExpiration
+        );
+        Cookies.set("jwtToken", response.data.token.jwtToken, {
+          expires: expirationDate,
+          path: "/",
+        });
+        Cookies.set("refreshToken", response.data.token.refreshToken, {
+          expires: expirationDate,
+          path: "/",
+        });
+
+        setIsAuthenticated(true);
       }
     };
 

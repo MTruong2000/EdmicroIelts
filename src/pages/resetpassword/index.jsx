@@ -51,7 +51,6 @@ function ResetPassword() {
           },
         }
       );
-      console.log(response);
       Swal.fire({
         position: "center",
         icon: "success",

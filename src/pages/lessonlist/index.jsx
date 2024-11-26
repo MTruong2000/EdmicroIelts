@@ -2,7 +2,6 @@ import Footer from "../../components/footer";
 import Header from "../../components/header";
 import { Player } from "video-react";
 import { GrLinkPrevious } from "react-icons/gr";
-import { MdOutlineCancel } from "react-icons/md";
 import { SiTicktick } from "react-icons/si";
 import { FaRegCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -92,11 +91,10 @@ function LessionList() {
     }
   };
 
-
   return (
     <>
       <Header className="block-header-courses" />
-      <div className="container block-body-lesson">
+      <div className=" block-body-lesson">
         <div className="block-body-lesson-title">{titleCourse}</div>
         <div className="block-body-lesson-desc">
           <div
@@ -128,11 +126,14 @@ function LessionList() {
             <div className="block-body-lesson-desc-list-lesson">
               <div className="block-body-lesson-desc-list-lesson-header">
                 <h3>Lessons</h3>
-                <MdOutlineCancel
+                <div
+                  className="icons-x"
                   onClick={() => {
                     setIsShowList((prev) => !prev);
                   }}
-                />
+                >
+                  x
+                </div>
               </div>
               <div className="block-body-lesson-desc-list-lesson-list-lesson">
                 {listLesson.map((item, index) => {

@@ -200,7 +200,7 @@ function AccountInfo() {
           </div>
           <div className="block-account-info-1-right">
             <div className="account-infomation">
-              <h1>Account Infomation</h1>
+              <h1>Thông tin tài khoản</h1>
               {!isCheckEditProfile && (
                 <CiEdit
                   onClick={() => setIsCheckEditProfile((prev) => !prev)}
@@ -208,7 +208,7 @@ function AccountInfo() {
               )}
             </div>
             <div className="block-account-infomation-block">
-              <p>Full Name</p>
+              <p>Họ và tên</p>
               <Input
                 placeholder=""
                 value={fullName}
@@ -226,7 +226,7 @@ function AccountInfo() {
               />
             </div>
             <div className="block-account-infomation-block">
-              <p>Phone number</p>
+              <p>Số điện thoại</p>
               <Input
                 placeholder=""
                 value={phoneNumber}
@@ -245,13 +245,13 @@ function AccountInfo() {
                   className="block-account-infomation-btn-update"
                   onClick={handleUpdateAcc}
                 >
-                  Save Changes
+                  Lưu thay đổi
                 </div>
                 <div
                   className="block-account-infomation-btn"
                   onClick={() => setIsCheckEditProfile((prev) => !prev)}
                 >
-                  Cancel
+                  Hủy
                 </div>
               </div>
             )}
@@ -260,7 +260,7 @@ function AccountInfo() {
         <div className="block-account-info-1">
           <div className="block-account-info-1-right">
             <div className="block-account-title">
-              <h1>Password</h1>
+              <h1>Mật khẩu</h1>
               {!isCheckEditPassword && (
                 <CiEdit
                   onClick={() => setIsCheckEditPassword((prev) => !prev)}
@@ -268,9 +268,9 @@ function AccountInfo() {
               )}
             </div>
             <div className="block-account-infomation-block">
-              <p>Current Passwordr</p>
+              <p>Mật khẩu hiện tại</p>
               <Input.Password
-                placeholder="Enter your current password"
+                placeholder="Mật khẩu hiện tại"
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
@@ -280,9 +280,9 @@ function AccountInfo() {
               />
             </div>
             <div className="block-account-infomation-block">
-              <p>New Password</p>
+              <p>Mật khẩu mới</p>
               <Input.Password
-                placeholder="Enter your current password"
+                placeholder="Mật khẩu mới"
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
@@ -292,9 +292,9 @@ function AccountInfo() {
               />
             </div>
             <div className="block-account-infomation-block">
-              <p>Confirm New Password</p>
+              <p>Xác nhận mật khẩu mới</p>
               <Input.Password
-                placeholder="Enter your current password"
+                placeholder="Xác nhận mật khẩu mới"
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
@@ -311,13 +311,13 @@ function AccountInfo() {
                   className="block-account-infomation-btn-update"
                   onClick={handleChangePassWord}
                 >
-                  Update Password
+                  Cập nhật mật khẩu
                 </div>
                 <div
                   className="block-account-infomation-btn"
                   onClick={() => setIsCheckEditPassword((prev) => !prev)}
                 >
-                  Cancel
+                  Hủy
                 </div>
               </div>
             )}

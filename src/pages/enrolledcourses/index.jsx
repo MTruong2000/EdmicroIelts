@@ -39,7 +39,7 @@ function EnrolledCourse() {
     <>
       <Header className="block-header-courses" />
       <div className="container block-enrolled-courses-parent">
-        <h2>Enrolled Courses</h2>
+        <h2>Các khóa học đã đăng ký</h2>
         <div className="block-enrolled-courses">
           {enrolledCourse.map((item) => (
             <div
