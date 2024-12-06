@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 const RequireAuth = ({ children }) => {
+  RequireAuth.propTypes = {
+    children: PropTypes.string,
+  };
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const jwtToken = Cookies.get("jwtToken");
   const refreshToken = Cookies.get("refreshToken");

@@ -84,6 +84,11 @@
         background: #000948;
         border-radius: 100px;
         color: var(--text-color-light);
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.8;;
+        }
       }
     }
   }

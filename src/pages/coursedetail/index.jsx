@@ -4,16 +4,20 @@ import { CiClock2 } from "react-icons/ci";
 import { FaCheck } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import proFileAvatarPlaceholder from "/img/Profile_avatar_placeholder.png";
+import Cookies from "js-cookie";
 import axios from "axios";
+import Swal from "sweetalert2";
 import "./style.scss";
 
 function CourseDetail() {
   const [courseDetail, setCourseDetail] = useState({});
   const [courseContent, setCourseContent] = useState([]);
   const { id } = useParams();
-
+  const navigate = useNavigate();
+  const jwtToken = Cookies.get("jwtToken");
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,13 +28,48 @@ function CourseDetail() {
         setCourseDetail(response.data);
         setCourseContent(response.data.courseContent.split("|"));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
-
     fetchData();
   }, []);
   
+const paymentCourse = async () => { 
+  try {
+    const response = await axios.post(
+      `${
+        import.meta.env.VITE_DOMAIN
+      }api/Payment/CreatePaymentUrl`,
+      {
+        courseId: id,
+        amount: courseDetail.price,
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`, 
+          'Content-Type': 'application/json', 
+        },
+      }
+    );
+    window.location.href = response.data.paymentUrl;
+  } catch (error) {
+    Swal.fire({
+      title: "Payment Fail ?",
+      text: "Payment Fail",
+      icon: "error",
+    });
+    console.error("Payment error:", error.response.data.message);
+  }
+};
+
+const handleResgister = () => {
+  if (jwtToken) {
+    paymentCourse();
+  } else {
+    navigate("/login");
+  }
+};
+
   return (
     <>
       <Header className="block-header-courses" />
@@ -65,7 +104,7 @@ function CourseDetail() {
             ))}
           </div>
           <div className="block-course-btn">
-            <div className="btn-resgister-now">Đăng ký ngay</div>
+            <div className="btn-resgister-now" onClick={handleResgister}>Đăng ký ngay</div>
           </div>
         </div>
         <div className="block-course-teacher">
