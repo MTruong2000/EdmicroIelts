@@ -8,9 +8,14 @@ import Cookies from "js-cookie";
 import proFileAvatarPlaceholder from "/img/Profile_avatar_placeholder.png";
 import Loading from "../loading";
 import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
 import "./style.scss";
 
 function Header({ className }) {
+  Header.propTypes = {
+    className: PropTypes.string,
+  };
+
   const [isLoading, setIsLoading] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

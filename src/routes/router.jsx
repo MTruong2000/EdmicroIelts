@@ -7,14 +7,12 @@ import CourseDetail from "../pages/coursedetail";
 import Login from "../pages/login";
 import SignUp from "../pages/signup";
 import AccountInfo from "../pages/accountinfo";
-import Cookies from "js-cookie";
 import RequireAuth from "../auth/requireauth";
 import EnrolledCourse from "../pages/enrolledcourses";
 import LessionList from "../pages/lessonlist";
 import RequestPassword from "../pages/requestpassword";
 import ResetPassword from "../pages/resetpassword";
-
-const jwtToken = Cookies.get("jwtToken");
+import PaymentSuccess from "../pages/paymentsuccess";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/reset-password",
     element: <ResetPassword />,
+  },
+  {
+    path: "/PaymentSuccess",
+    element: <PaymentSuccess />,
   },
   {
     path: "/enrolled-courses",
