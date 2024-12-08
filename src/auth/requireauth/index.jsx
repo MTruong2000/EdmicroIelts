@@ -28,16 +28,13 @@ const RequireAuth = ({ children }) => {
             import.meta.env.VITE_DOMAIN
           }api/User/RefreshJwt?refreshToken=${refreshToken}`
         );
-
-        const expirationDate = new Date(
-          response.data.token.refreshTokenExpiration
-        );
+        console.log(response.data);
         Cookies.set("jwtToken", response.data.token.jwtToken, {
-          expires: expirationDate,
+          expires: 30,
           path: "/",
         });
         Cookies.set("refreshToken", response.data.token.refreshToken, {
-          expires: expirationDate,
+          expires: 30,
           path: "/",
         });
 

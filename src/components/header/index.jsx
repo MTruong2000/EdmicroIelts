@@ -38,6 +38,10 @@ function Header({ className }) {
             },
           }
         );
+        Cookies.set('Uid', response.data.id, {
+          expires: 30,
+          path: '/',
+        });
         setInfoAccount(response.data);
       } catch (error) {
         console.log(error);

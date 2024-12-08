@@ -12,7 +12,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
-  const handleResetPassword = ()=>{
+  const handleResetPassword = () => {
     navigate("/request-password");
   };
   const handleLogin = async () => {
@@ -20,7 +20,7 @@ function Login() {
       Swal.fire({
         title: "Warning ?",
         text: "Please enter information",
-        icon: "warning",
+        icon: "warning"
       });
       return;
     }
@@ -32,23 +32,20 @@ function Login() {
         }api/User/Login?email=${email}&password=${passWord}`
       );
 
-      const expirationDate = new Date(
-        response.data.token.refreshTokenExpiration
-      );
       Cookies.set("jwtToken", response.data.token.jwtToken, {
-        expires: expirationDate,
-        path: "/",
+        expires: 30,
+        path: "/"
       });
       Cookies.set("refreshToken", response.data.token.refreshToken, {
-        expires: expirationDate,
-        path: "/",
+        expires: 30,
+        path: "/"
       });
       Swal.fire({
         position: "center",
         icon: "success",
         title: "Login Success",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1500
       });
       setTimeout(() => {
         navigate("/");
@@ -57,7 +54,7 @@ function Login() {
       Swal.fire({
         title: "Login Fail ?",
         text: error.response.data.message,
-        icon: "error",
+        icon: "error"
       });
       console.error("Login error:", error.response.data.message);
     }
@@ -90,7 +87,9 @@ function Login() {
             <div className="radio-remember">
               <Checkbox>Tự động đăng nhập</Checkbox>
             </div>
-            <div className="fotgotpass" onClick={handleResetPassword}>Quên mật khẩu?</div>
+            <div className="fotgotpass" onClick={handleResetPassword}>
+              Quên mật khẩu?
+            </div>
           </div>
           <div className="btn-login" onClick={handleLogin}>
             Đăng nhập

@@ -6,12 +6,26 @@ import { SiTicktick } from "react-icons/si";
 import { FaRegCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import { MessageOutlined } from "@ant-design/icons";
+import { Button, Drawer, Input, List, Typography, Layout } from "antd";
+import moment from "moment";
 import Cookies from "js-cookie";
+import Swal from "sweetalert2";
+import axios from "axios";
 import "./style.scss";
+
+const { Content } = Layout;
 
 function LessionList() {
   const [searchParams] = useSearchParams();
+  const jwtToken = Cookies.get("jwtToken");
+  const courseId = searchParams.get("courseId");
+  const Uid = Cookies.get("Uid");
+
+  const [visible, setVisible] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+
   const [isShowList, setIsShowList] = useState(false);
   const [listLesson, setLissLesson] = useState([]);
   const [activeLessson, setActiveLesson] = useState("");
@@ -20,15 +34,13 @@ function LessionList() {
 
   const titleCourse = searchParams.get("title");
   const fetchData = async () => {
-    const jwtToken = Cookies.get("jwtToken");
-    const courseId = searchParams.get("courseId");
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_DOMAIN}api/Lesson/LessonProgress/${courseId}`,
         {
           headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
+            Authorization: `Bearer ${jwtToken}`
+          }
         }
       );
       setLissLesson(response.data);
@@ -44,6 +56,51 @@ function LessionList() {
       console.log(error);
     }
   };
+
+  const fetchMessages = async (courseId, studentId) => {
+    console.log(studentId);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_DOMAIN}api/Chat/student/${courseId}/messages`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`
+          }
+        }
+      );
+      console.log(response.data);
+      setMessages(response.data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+
+  const sendMessage = async () => {
+    if (newMessage.trim() !== "") {
+      try {
+        await axios.post(
+          `${
+            import.meta.env.VITE_DOMAIN
+          }api/Chat/send-from-student?courseId=${courseId}&messageContent=${newMessage}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`
+            }
+          }
+        );
+        setNewMessage("");
+      } catch (error) {
+        Swal.fire({
+          title: "Send mess Fail ?",
+          text: error,
+          icon: "error"
+        });
+      }
+      fetchMessages(courseId, "");
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -81,8 +138,8 @@ function LessionList() {
         {},
         {
           headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
+            Authorization: `Bearer ${jwtToken}`
+          }
         }
       );
       response.status === 200 ? fetchData() : null;
@@ -175,6 +232,121 @@ function LessionList() {
             </div>
           )}
         </div>
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<MessageOutlined />}
+          className="btn-chatting"
+          style={{
+            backgroundColor: "#000",
+            borderColor: "#000",
+            color: "#fff",
+            width: "50px",
+            height: "50px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+          onClick={() => {
+            setVisible(true);
+            fetchMessages(courseId, "");
+          }}
+        />
+        <Drawer
+          title="Chat"
+          placement="right"
+          width={800}
+          onClose={() => setVisible(false)}
+          open={visible}
+        >
+          <Layout style={{ height: "100%" }}>
+            <Layout>
+              <Content
+                style={{
+                  padding: "16px",
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%"
+                }}
+              >
+                <div
+                  style={{
+                    flexGrow: 1,
+                    overflowY: "auto",
+                    paddingBottom: "16px"
+                  }}
+                >
+                  <List
+                    dataSource={messages}
+                    renderItem={(item) => (
+                      <List.Item
+                        style={{
+                          justifyContent:
+                            item.senderId.toString() === Uid
+                              ? "flex-end"
+                              : "flex-start",
+                          textAlign:
+                            item.senderId.toString() === Uid ? "right" : "left"
+                        }}
+                      >
+                        <div
+                          style={{
+                            maxWidth: "70%",
+                            padding: "10px",
+                            borderRadius: "8px",
+                            backgroundColor:
+                              item.senderId.toString() === Uid
+                                ? "#000"
+                                : "#f0f0f0",
+                            color:
+                              item.senderId.toString() === Uid ? "#fff" : "#000"
+                          }}
+                        >
+                          <Typography.Text
+                            style={{
+                              color:
+                                item.senderId.toString() === Uid
+                                  ? "#fff"
+                                  : "#000"
+                            }}
+                          >
+                            {item.content}
+                          </Typography.Text>
+                          <div
+                            style={{
+                              fontSize: "12px",
+                              marginTop: "5px",
+                              opacity: 0.6
+                            }}
+                          >
+                            {moment(item.timestamp).format("HH:mm A")}
+                          </div>
+                        </div>
+                      </List.Item>
+                    )}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    alignItems: "center"
+                  }}
+                >
+                  <Input
+                    placeholder="Type a message..."
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    onPressEnter={sendMessage}
+                  />
+                  <Button type="primary" onClick={sendMessage}>
+                    Send
+                  </Button>
+                </div>
+              </Content>
+            </Layout>
+          </Layout>
+        </Drawer>
       </div>
       <Footer />
     </>
